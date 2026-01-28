@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Convite de 15 Anos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            background: #f8f8f8;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Capa inicial - OTIMIZADA PARA CELULAR */
+        .cover-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .cover-container.active {
+            pointer-events: all;
+        }
+
+        .cover-left, .cover-right {
+            position: absolute;
+            top: 0;
+            width: 100%; /* Alterado para 100% para celular */
+            height: 50%; /* Cada lado ocupa metade da tela */
+            background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+            transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .cover-left {
+            left: 0;
+            top: 0;
+            border-right: none;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .cover-right {
+            right: 0;
+            top: 50%; /* Começa na metade da tela */
+            border-left: none;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .cover-container.opened .cover-left {
+            transform: translateY(-100%);
+        }
+
+        .cover-container.opened .cover-right {
+            transform: translateY(100%);
+        }
+
+        .cover-content {
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Lado esquerdo - Interação */
+        .interaction-side {
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .monogram {
+            font-size: 50px; /* Reduzido para celular */
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #001f3f;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .bow {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .bow::before,
+        .bow::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(135deg, #001f3f 0%, #2a4d7a 50%, #001f3f 100%);
+            border-radius: 50% 0;
+        }
+
+        .bow::before {
+            width: 55px;
+            height: 55px;
+            top: 20%;
+            left: 5%;
+            transform: rotate(-45deg);
+        }
+
+        .bow::after {
+            width: 55px;
+            height: 55px;
+            top: 20%;
+            right: 5%;
+            transform: rotate(45deg);
+        }
+
+        .bow-center {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: linear-gradient(180deg, #fff 0%, #e8e8e8 50%, #fff 100%);
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .click-text {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #001f3f;
+            cursor: pointer;
+            padding: 12px 25px;
+            border: 2px solid #001f3f;
+            display: inline-block;
+            transition: all 0.3s;
+            background: white;
+            margin-top: 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(0, 31, 63, 0.15);
+        }
+
+        .click-text:active {
+            background: #001f3f;
+            color: white;
+            transform: translateY(2px);
+        }
+
+        .heart-divider {
+            color: #5d8aa8;
+            font-size: 16px;
+            margin: 12px 0;
+        }
+
+        .welcome-message {
+            font-size: 20px;
+            color: #555;
+            margin-top: 12px;
+            font-style: italic;
+            line-height: 1.4;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        /* Lado direito - Foto (AGORA OCUPA TODA A METADE INFERIOR) */
+        .photo-side {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .cover-photo {
+            width: 160%;
+            max-width: 190px; /* AUMENTADO para ocupar mais espaço */
+            height: auto;
+            aspect-ratio: 3/4;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border: 6px solid white;
+            margin: 0 auto;
+        }
+
+        .cover-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid #001f3f;
+            border-radius: 12px;
+            z-index: -1;
+        }
+
+        /* Conteúdo principal */
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
+            background: linear-gradient(180deg, #f9f9f9 0%, #fff 100%);
+            opacity: 0;
+            animation: fadeIn 1s forwards 1.5s;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* NOVO: Container para as imagens decorativas */
+        .profile-decorations {
+            position: relative;
+            width: 100%;
+            max-width: 275px;
+            margin: 20px auto 25px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* Imagens decorativas - NOVAS CLASSES */
+        .top-decoration {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            max-width: 330px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .left-decoration {
+            position: absolute;
+            top: 80%;
+            left: -50px;
+            transform: translateY(-50%);
+            height: 135%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .right-decoration {
+            position: absolute;
+            top: 80%;
+            right: -50px;
+            transform: translateY(-50%);
+            height: 135%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Cabeçalho do convite */
+        .invitation-header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .couple-names {
+            font-size: 60px; /* Ajustado para mobile */
+            font-family: 'Parisienne', cursive;
+            color: #001f3f;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            padding: 0 10px;
+        }
+
+        .welcome-text {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            padding: 0 12px;
+        }
+
+        .event-date {
+            font-size: 18px;
+            color: #001f3f;
+            font-style: italic;
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 0 12px;
+        }
+
+        .event-details {
+            font-size: 16px;
+            color: #555;
+            margin: 12px 0;
+            font-style: italic;
+            padding: 0 12px;
+        }
+
+        /* Contagem regressiva */
+        .countdown {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .countdown-item {
+            text-align: center;
+            flex: 1;
+            min-width: 65px;
+        }
+
+        .countdown-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #001f3f;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            color: #5d8aa8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Seções de conteúdo - ESTILO UNIFICADO */
+        .confirmation-section,
+        .gifts-section,
+        .location-section {
+            width: 100%;
+            max-width: 100%;
+            background: white;
+            padding: 25px 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            text-align: center;
+            border-top: 5px solid #001f3f;
+        }
+
+        .confirmation-title,
+        .gifts-title,
+        .location-title {
+            font-size: 24px;
+            color: #001f3f;
+            margin-bottom: 20px;
+            font-family: 'Brush Script MT', cursive;
+            padding: 0 10px;
+        }
+
+        .confirmation-text,
+        .location-text {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            padding: 0 10px;
+        }
+
+        /* Botões */
+        .whatsapp-button,
+        .maps-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 12px 0;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .whatsapp-button {
+            background: #25D366;
+            box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-button:active {
+            background: #1da851;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(37, 211, 102, 0.4);
+        }
+
+        .maps-button {
+            background: #4285F4;
+            box-shadow: 0 3px 10px rgba(66, 133, 244, 0.3);
+        }
+
+        .maps-button:active {
+            background: #3367D6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(66, 133, 244, 0.4);
+        }
+
+        .whatsapp-icon,
+        .maps-icon {
+            font-size: 18px;
+        }
+
+        .location-info {
+            background: #f0f5fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            border-left: 3px solid #5d8aa8;
+            border-right: 3px solid #5d8aa8;
+        }
+
+        .location-name {
+            font-size: 18px;
+            color: #001f3f;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .location-address {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .location-date {
+            font-size: 14px;
+            color: #5d8aa8;
+            font-weight: 600;
+        }
+
+        /* Seção de presentes */
+        .gift-category {
+            margin-bottom: 25px;
+            text-align: left;
+            padding: 0 8px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            color: #001f3f;
+            margin-bottom: 12px;
+            font-weight: bold;
+            border-bottom: 2px solid #5d8aa8;
+            padding-bottom: 6px;
+        }
+
+        .gift-items {
+            color: #555;
+            line-height: 1.6;
+            font-size: 14px;
+            padding-left: 12px;
+        }
+
+        .gift-items ul {
+            padding-left: 18px;
+        }
+
+        .gift-items li {
+            margin-bottom: 6px;
+        }
+
+        .brand-note {
+            color: #5d8aa8;
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        .size-info {
+            background: #f0f5fa;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 8px;
+            color: #001f3f;
+            font-style: italic;
+            border-left: 3px solid #5d8aa8;
+            font-size: 13px;
+        }
+
+        /* NOVO: Estilo para a frase inspiradora */
+        .inspiration-quote {
+            text-align: center;
+            margin: 40px auto 30px;
+            padding: 0 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #001f3f;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            font-style: italic;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0 10px;
+        }
+
+        .quote-author {
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            color: #5d8aa8;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 10px;
+            display: inline-block;
+        }
+
+        /* Ajustes específicos para celulares pequenos */
+        @media (max-width: 380px) {
+            .monogram {
+                font-size: 42px;
+            }
+            
+            .couple-names {
+                font-size: 32px;
+            }
+            
+            .profile-decorations {
+                max-width: 250px;
+            }
+            
+            .top-decoration {
+                top: -30px;
+                width: 110%;
+                max-width: 300px;
+            }
+            
+            .left-decoration {
+                left: -40px;
+                height: 85%;
+            }
+            
+            .right-decoration {
+                right: -40px;
+                height: 85%;
+            }
+            
+            .cover-photo {
+                max-width: 320px;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+            }
+            
+            .countdown-number {
+                font-size: 24px;
+            }
+            
+            .quote-text {
+                font-size: 22px;
+            }
+            
+            .quote-author {
+                font-size: 14px;
+            }
+        }
+
+        /* Ajustes para telas maiores (tablets) */
+        @media (min-width: 768px) {
+            .cover-left, .cover-right {
+                width: 50%;
+                height: 100%;
+            }
+            
+            .cover-left {
+                top: 0;
+                left: 0;
+                border-right: 1px solid #e0e0e0;
+                border-bottom: none;
+            }
+            
+            .cover-right {
+                top: 0;
+                right: 0;
+                border-left: 1px solid #e0e0e0;
+                border-top: none;
+            }
+            
+            .cover-container.opened .cover-left {
+                transform: translateX(-100%);
+            }
+            
+            .cover-container.opened .cover-right {
+                transform: translateX(100%);
+            }
+            
+            .main-content {
+                padding: 40px;
+            }
+            
+            .couple-names {
+                font-size: 50px;
+            }
+            
+            .profile-decorations {
+                max-width: 450px;
+            }
+            
+            .top-decoration {
+                top: -60px;
+                width: 130%;
+                max-width: 580px;
+            }
+            
+            .left-decoration {
+                left: -70px;
+                height: 95%;
+            }
+            
+            .right-decoration {
+                right: -70px;
+                height: 95%;
+            }
+            
+            .countdown {
+                gap: 20px;
+                max-width: 450px;
+            }
+            
+            .countdown-number {
+                font-size: 36px;
+            }
+            
+            .confirmation-section,
+            .gifts-section,
+            .location-section {
+                padding: 35px 25px;
+                max-width: 600px;
+            }
+            
+            .cover-photo {
+                max-width: 320px;
+            }
+            
+            .quote-text {
+                font-size: 32px;
+            }
+            
+            .quote-author {
+                font-size: 18px;
+            }
+        }
+
+        /* Ajuste para iPhones e dispositivos com notch */
+        @supports (padding: max(0px)) {
+            .main-content {
+                padding-left: max(15px, env(safe-area-inset-left));
+                padding-right: max(15px, env(safe-area-inset-right));
+                padding-bottom: max(20px, env(safe-area-inset-bottom));
+            }
+            
+            .invitation-header,
+            .confirmation-section,
+            .gifts-section,
+            .location-section {
+                padding-left: max(10px, env(safe-area-inset-left));
+                padding-right: max(10px, env(safe-area-inset-right));
+            }
+            
+            .inspiration-quote {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-container active" id="cover">
+        <div class="cover-left">
+            <div class="cover-content">
+                <div class="interaction-side">
+                    <div class="monogram">AM</div>
+                    <div class="heart-divider">♡</div>
+                    <div class="bow">
+                        <div class="bow-center"></div>
+                    </div>
+                    <div class="heart-divider">♡</div>
+                    <div class="click-text" onclick="openCover()">Clique para abrir</div>
+                    <div class="welcome-message">Descubra a celebração dos meus 15 anos</div>
+                </div>
+            </div>
+        </div>
+        <div class="cover-right">
+            <div class="cover-content">
+                <div class="photo-side">
+                    <div class="cover-photo">
+                        <div class="photo-frame">
+                            <!-- IMAGEM DA CAPA - LOCAL -->
+                            <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/AliceFoto.jpeg" 
+                                 alt="Alice Matos"
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/300x400/001f3f/ffffff?text=Alice+Capa'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Fontes Google Corrigidas -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+    
+    <div class="main-content">
+        <div class="invitation-header">
+            <!-- NOVO: Container com decorações -->
+            <div class="profile-decorations">
+                <!-- Imagem do topo - LOCAL -->
+                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-Topo.png" 
+                     alt="Decoração Topo" 
+                     class="top-decoration">
+                
+                <!-- Imagem da esquerda - LOCAL -->
+                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-ladoEsquerdo.png" 
+                     alt="Decoração Esquerda" 
+                     class="left-decoration">
+                
+                <!-- Imagem da direita - LOCAL -->
+                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-ladoDireito.png" 
+                     alt="Decoração Direita" 
+                     class="right-decoration">
+                
+                <!-- Imagem principal (existente) - LOCAL -->
+                <div class="profile-image">
+                    <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/matos.png" 
+                         alt="Alice Matos"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/001f3f/ffffff?text=Alice+Matos+15+anos'">
+                </div>
+            </div>
+            
+            <div class="couple-names">Alice Matos</div>
+            <div class="welcome-text">Está chegando o meu grande dia! Espero você lá!</div>
+            <div class="event-date">07 de março de 2026</div>
+            <div class="event-details">Comemoração dos meus 15 anos!</div>
+        </div>
+
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Dias</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Horas</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutos</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Segundos</div>
+            </div>
+        </div>
+
+        <!-- NOVA SEÇÃO: LOCAL DO EVENTO COM BOTOÃ -->
+        <div class="location-section">
+            <div class="location-title">📍 Local do Evento</div>
+            <div class="location-text">
+                A festa será realizada no <strong>Cristallo Eventos</strong>, um espaço encantador perfeito para celebrar essa data especial!
+            </div>
+            
+            <div class="location-info">
+                <div class="location-name">Cristallo Eventos</div>
+                <div class="location-address">
+                   Av. Amaralina, 1405 - Pampalona, Feira de Santana - BA, 44031-645
+                </div>
+                <div class="location-date">
+                    📅 07 de Março de 2026
+                </div>
+            </div>
+            
+            <a href="https://www.google.com/maps?q=Cristallo+Eventos" 
+               class="maps-button" 
+               target="_blank">
+                <span class="maps-icon">📍</span>
+                Ver Local no Google Maps
+            </a>
+            
+            <div style="margin-top: 10px; color: #5d8aa8; font-size: 13px;">
+                Clique no botão para abrir a localização no seu celular
+            </div>
+        </div>
+
+        <div class="confirmation-section">
+            <div class="confirmation-title">Confirme sua presença!</div>
+            <div class="confirmation-text">
+                Para confirmar sua presença no meu aniversário de 15 anos, 
+                clique no botão abaixo para enviar uma mensagem no WhatsApp. 
+                Será um prazer ter você comemorando comigo!
+            </div>
+            <a href="https://wa.me/5575999930692?text=Olá!%20Confirmo%20minha%20presença%20no%20aniversário%20de%2015%20anos%20da%20Alice!" 
+               class="whatsapp-button" 
+               target="_blank">
+                <span class="whatsapp-icon">📱</span>
+                Confirmar pelo WhatsApp
+            </a>
+            <div style="margin-top: 20px; color: #5d8aa8; font-size: 14px;">
+                Número: (75) 99993-0692
+            </div>
+        </div>
+
+        <div class="gifts-section">
+            <div class="gifts-title">Ideias de Presente</div>
+
+            <div class="gift-category">
+                <div class="category-title"> 1. Perfumes</div>
+                <div class="gift-items">
+                    <strong>We Pink:</strong> Liberté Exclusif, Obsessed, Ruby, One Touch<br>
+                    <strong>O Boticário:</strong> Floratta Red, Egeo Dolce, Egeo Cherry Blest<br>
+                    <strong>Natura:</strong> Ilia, Luna Ousadia, Luna Fascinante<br>
+                    <strong>Carolina Herrera:</strong> Good Girl Blush, Very Good Girl
+                </div>
+            </div>
+
+            <div class="gift-category">
+                <div class="category-title"> 2. Maquiagem</div>
+                <div class="gift-items">
+                    <ul>
+                        <li>Gloss <span class="brand-note">(Franciny Ehlke)</span></li>
+                        <li>Iluminador</li>
+                        <li>Blush <span class="brand-note">(Oceane)</span></li>
+                        <li>Rímel</li>
+                        <li>Lápis de olho</li>
+                        <li>Paleta de maquiagem colorida</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="gift-category">
+                <div class="category-title"> 3. Roupas e Calçados</div>
+                <div class="gift-items">
+                    <div class="size-info">
+                        Visto PP ou P | Calço 36/37
+                    </div>
+                </div>
+            </div>
+
+            <div class="gift-category">
+                <div class="category-title"> 4. Pelúcias</div>
+                <div class="gift-items">
+                    Qualquer uma
+                </div>
+            </div>
+
+            <div class="gift-category">
+                <div class="category-title"> 5. Acessórios</div>
+                <div class="gift-items">
+                    De preferência dourado
+                </div>
+            </div>
+            
+            <!-- NOVO: Frase inspiradora -->
+            <div class="inspiration-quote">
+                <div class="quote-text">… e o sonho continua</div>
+                <div class="quote-author">- Charles Leclerc</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openCover() {
+            const cover = document.getElementById('cover');
+            cover.classList.add('opened');
+            
+            // Adicionar vibração sutil no celular
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            setTimeout(() => {
+                cover.style.display = 'none';
+                // Forçar redimensionamento para evitar problemas de layout
+                window.dispatchEvent(new Event('resize'));
+            }, 1500);
+        }
+
+        function updateCountdown() {
+            const eventDate = new Date('2026-03-07T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = "00";
+                document.getElementById('hours').textContent = "00";
+                document.getElementById('minutes').textContent = "00";
+                document.getElementById('seconds').textContent = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Melhorar experiência mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar suporte para toque na capa
+            const clickText = document.querySelector('.click-text');
+            
+            // Ajustar para telas pequenas
+            function adjustLayout() {
+                const isMobile = window.innerWidth <= 767;
+                const cover = document.getElementById('cover');
+                
+                if (isMobile) {
+                    // Garantir que a capa ocupe toda a tela
+                    cover.style.height = '100vh';
+                }
+            }
+            
+            // Ajustar layout inicial
+            adjustLayout();
+            
+            // Ajustar ao redimensionar
+            window.addEventListener('resize', adjustLayout);
+            
+            // Touch events para o botão
+            clickText.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            clickText.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(1)';
+                openCover();
+            });
+            
+            // Clique normal (para desktop)
+            clickText.addEventListener('click', function(e) {
+                e.preventDefault();
+                openCover();
+            });
+        });
+
+        // Inicializar contagem regressiva
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
