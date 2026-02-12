@@ -39,8 +39,8 @@
         .cover-left, .cover-right {
             position: absolute;
             top: 0;
-            width: 100%; /* Alterado para 100% para celular */
-            height: 50%; /* Cada lado ocupa metade da tela */
+            width: 100%;
+            height: 50%;
             background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
             transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
             display: flex;
@@ -58,7 +58,7 @@
 
         .cover-right {
             right: 0;
-            top: 50%; /* Começa na metade da tela */
+            top: 50%;
             border-left: none;
             border-top: 1px solid #e0e0e0;
         }
@@ -89,7 +89,7 @@
         }
 
         .monogram {
-            font-size: 50px; /* Reduzido para celular */
+            font-size: 65px;
             font-family: 'Georgia', serif;
             font-style: italic;
             font-weight: bold;
@@ -180,7 +180,7 @@
             text-align: center;
         }
 
-        /* Lado direito - Foto (AGORA OCUPA TODA A METADE INFERIOR) */
+        /* Lado direito - ESPAÇO VAZIO */
         .photo-side {
             width: 100%;
             height: 100%;
@@ -188,45 +188,10 @@
             align-items: center;
             justify-content: center;
             padding: 10px;
+            flex-direction: column;
         }
 
-        .cover-photo {
-            width: 160%;
-            max-width: 190px; /* AUMENTADO para ocupar mais espaço */
-            height: auto;
-            aspect-ratio: 3/4;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            border: 6px solid white;
-            margin: 0 auto;
-        }
-
-        .cover-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-            display: block;
-        }
-
-        .photo-frame {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .photo-frame::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            right: -8px;
-            bottom: -8px;
-            border: 2px solid #001f3f;
-            border-radius: 12px;
-            z-index: -1;
-        }
+       
 
         /* Conteúdo principal */
         .main-content {
@@ -247,7 +212,7 @@
             }
         }
 
-        /* NOVO: Container para as imagens decorativas */
+        /* Container para as imagens decorativas */
         .profile-decorations {
             position: relative;
             width: 100%;
@@ -276,7 +241,7 @@
             backface-visibility: hidden;
         }
 
-        /* Imagens decorativas - NOVAS CLASSES */
+        /* Imagens decorativas */
         .top-decoration {
             position: absolute;
             top: -40px;
@@ -317,7 +282,7 @@
         }
 
         .couple-names {
-            font-size: 60px; /* Ajustado para mobile */
+            font-size: 60px;
             font-family: 'Parisienne', cursive;
             color: #001f3f;
             margin-bottom: 20px;
@@ -387,6 +352,7 @@
         }
 
         /* Seções de conteúdo - ESTILO UNIFICADO */
+        .dresscode-section,
         .confirmation-section,
         .gifts-section,
         .location-section {
@@ -401,6 +367,7 @@
             border-top: 5px solid #001f3f;
         }
 
+        .dresscode-title,
         .confirmation-title,
         .gifts-title,
         .location-title {
@@ -411,6 +378,7 @@
             padding: 0 10px;
         }
 
+        .dresscode-text,
         .confirmation-text,
         .location-text {
             font-size: 15px;
@@ -496,6 +464,29 @@
             font-weight: 600;
         }
 
+        /* NOVO: Estilo para restrição de cores */
+        .color-restriction {
+            background: linear-gradient(135deg, #ffefef 0%, #fff0f5 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff6b6b;
+            border-right: 4px solid #ff6b6b;
+        }
+
+        .restriction-title {
+            font-size: 18px;
+            color: #d32f2f;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .restriction-text {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+        }
+
         /* Seção de presentes */
         .gift-category {
             margin-bottom: 25px;
@@ -544,7 +535,7 @@
             font-size: 13px;
         }
 
-        /* NOVO: Estilo para a frase inspiradora */
+        /* Estilo para a frase inspiradora */
         .inspiration-quote {
             text-align: center;
             margin: 40px auto 30px;
@@ -609,10 +600,6 @@
                 height: 85%;
             }
             
-            .cover-photo {
-                max-width: 320px;
-            }
-            
             .countdown-item {
                 min-width: 60px;
             }
@@ -626,6 +613,10 @@
             }
             
             .quote-author {
+                font-size: 14px;
+            }
+            
+            .empty-space {
                 font-size: 14px;
             }
         }
@@ -696,6 +687,7 @@
                 font-size: 36px;
             }
             
+            .dresscode-section,
             .confirmation-section,
             .gifts-section,
             .location-section {
@@ -703,8 +695,9 @@
                 max-width: 600px;
             }
             
-            .cover-photo {
-                max-width: 320px;
+            .empty-space {
+                font-size: 18px;
+                padding: 30px;
             }
             
             .quote-text {
@@ -725,6 +718,7 @@
             }
             
             .invitation-header,
+            .dresscode-section,
             .confirmation-section,
             .gifts-section,
             .location-section {
@@ -733,6 +727,11 @@
             }
             
             .inspiration-quote {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+            }
+            
+            .empty-space {
                 padding-left: max(20px, env(safe-area-inset-left));
                 padding-right: max(20px, env(safe-area-inset-right));
             }
@@ -750,28 +749,21 @@
                         <div class="bow-center"></div>
                     </div>
                     <div class="heart-divider">♡</div>
-                    <div class="click-text" onclick="openCover()">Clique para abrir</div>
-                    <div class="welcome-message">Descubra a celebração dos meus 15 anos</div>
+                    
                 </div>
             </div>
         </div>
         <div class="cover-right">
             <div class="cover-content">
                 <div class="photo-side">
-                    <div class="cover-photo">
-                        <div class="photo-frame">
-                            <!-- IMAGEM DA CAPA - LOCAL -->
-                            <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/AliceFoto.jpeg" 
-                                 alt="Alice Matos"
-                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/300x400/001f3f/ffffff?text=Alice+Capa'">
-                        </div>
-                    </div>
+                   <div class="click-text" onclick="openCover()">Clique aqui para abrir</div>
+                    <div class="welcome-message">Descubra a celebração dos meus 15 anos</div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Fontes Google Corrigidas -->
+    <!-- Fontes Google -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -781,7 +773,7 @@
     
     <div class="main-content">
         <div class="invitation-header">
-            <!-- NOVO: Container com decorações -->
+            <!-- Container com decorações -->
             <div class="profile-decorations">
                 <!-- Imagem do topo - LOCAL -->
                 <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-Topo.png" 
@@ -810,6 +802,7 @@
             <div class="welcome-text">Está chegando o meu grande dia! Espero você lá!</div>
             <div class="event-date">07 de março de 2026</div>
             <div class="event-details">Comemoração dos meus 15 anos!</div>
+            <div class="event-details" style="color: #001f3f; font-weight: bold;">⏰ Início: 19:00 horas</div>
         </div>
 
         <div class="countdown" id="countdown">
@@ -831,7 +824,30 @@
             </div>
         </div>
 
-        <!-- NOVA SEÇÃO: LOCAL DO EVENTO COM BOTOÃ -->
+        <!-- NOVA SEÇÃO: DRESS CODE -->
+        <div class="dresscode-section">
+            <div class="dresscode-title">👗 Dress Code</div>
+            <div class="dresscode-text">
+                Para tornar nossa festa ainda mais especial, escolha roupas elegantes e sofisticadas!
+            </div>
+            
+            <!-- NOVA: Restrição de cores -->
+            <div class="color-restriction">
+                <div class="restriction-title">⚠️ Atenção Especial</div>
+                <div class="restriction-text">
+                    <strong>Por favor, evitem usar as cores:</strong><br>
+                    🔴 Vermelho<br>
+                    🔵 Azul Claro<br><br>
+                    <em>Agradeço pela compreensão e colaboração!</em>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; color: #555; font-size: 15px;">
+                💡 Dica: Cores claras, tons pastéis e looks elegantes serão perfeitos!
+            </div>
+        </div>
+
+        <!-- LOCAL DO EVENTO COM BOTÃO -->
         <div class="location-section">
             <div class="location-title">📍 Local do Evento</div>
             <div class="location-text">
@@ -844,7 +860,7 @@
                    Av. Amaralina, 1405 - Pampalona, Feira de Santana - BA, 44031-645
                 </div>
                 <div class="location-date">
-                    📅 07 de Março de 2026
+                    📅 07 de Março de 2026 | ⏰ 19:00 horas
                 </div>
             </div>
             
@@ -863,8 +879,8 @@
         <div class="confirmation-section">
             <div class="confirmation-title">Confirme sua presença!</div>
             <div class="confirmation-text">
-                Para confirmar sua presença no meu aniversário de 15 anos, 
-                clique no botão abaixo para enviar uma mensagem no WhatsApp. 
+                Para confirmar sua presença no meu aniversário de 15 anos, 
+                clique no botão abaixo para enviar uma mensagem no WhatsApp. 
                 Será um prazer ter você comemorando comigo!
             </div>
             <a href="https://wa.me/5575999930692?text=Olá!%20Confirmo%20minha%20presença%20no%20aniversário%20de%2015%20anos%20da%20Alice!" 
@@ -878,16 +894,23 @@
             </div>
         </div>
 
+        <!-- SEÇÃO DE PRESENTES ATUALIZADA -->
         <div class="gifts-section">
-            <div class="gifts-title">Ideias de Presente</div>
+            <div class="gifts-title">🎁 Ideias de Presente</div>
 
             <div class="gift-category">
                 <div class="category-title"> 1. Perfumes</div>
                 <div class="gift-items">
-                    <strong>We Pink:</strong> Liberté Exclusif, Obsessed, Ruby, One Touch<br>
-                    <strong>O Boticário:</strong> Floratta Red, Egeo Dolce, Egeo Cherry Blest<br>
-                    <strong>Natura:</strong> Ilia, Luna Ousadia, Luna Fascinante<br>
-                    <strong>Carolina Herrera:</strong> Good Girl Blush, Very Good Girl
+                    <strong>O Boticário:</strong> <br>
+                    • Dolce Illusion<br>
+                    • Dolce Red<br>
+                    • Romance de Verão<br>
+                    • Orquideia Luimiere<br>
+                    • Amoruda<br>
+                    • Cereja Livre<br>
+                    • Her Code Climax<br>
+                    • Amor no Ar<br>
+                    • Coffe Unique
                 </div>
             </div>
 
@@ -906,29 +929,51 @@
             </div>
 
             <div class="gift-category">
-                <div class="category-title"> 3. Roupas e Calçados</div>
+                <div class="category-title"> 3. Roupas</div>
                 <div class="gift-items">
-                    <div class="size-info">
-                        Visto PP ou P | Calço 36/37
-                    </div>
+                    <ul>
+                        <li>Vestidos longos ou curtos</li>
+                        <li>Regatinhas</li>
+                        <li>Shorts tamanho 36</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="gift-category">
-                <div class="category-title"> 4. Pelúcias</div>
+                <div class="category-title"> 4. Calçados</div>
                 <div class="gift-items">
-                    Qualquer uma
+                    <ul>
+                        <li>Rasteirinhas</li>
+                        <li>Chinelos</li>
+                        <li>Crocs</li>
+                        <li>Papete</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="gift-category">
                 <div class="category-title"> 5. Acessórios</div>
                 <div class="gift-items">
-                    De preferência dourado
+                    <ul>
+                        <li>Colar com pingente</li>
+                        <li>Pulseiras</li>
+                        <li>Brincos de argolinha</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="gift-category">
+                <div class="category-title"> 6. Pelúcias</div>
+                <div class="gift-items">
+                    Qualquer uma
                 </div>
             </div>
             
-            <!-- NOVO: Frase inspiradora -->
+            <div class="size-info">
+                💡 <strong>Tamanhos:</strong> Visto PP ou P | Calço 36/37
+            </div>
+            
+            <!-- Frase inspiradora -->
             <div class="inspiration-quote">
                 <div class="quote-text">… e o sonho continua</div>
                 <div class="quote-author">- Charles Leclerc</div>
@@ -954,7 +999,8 @@
         }
 
         function updateCountdown() {
-            const eventDate = new Date('2026-03-07T00:00:00').getTime();
+            // Atualizado para 19:00 horas
+            const eventDate = new Date('2026-03-07T19:00:00').getTime();
             const now = new Date().getTime();
             const distance = eventDate - now;
 
