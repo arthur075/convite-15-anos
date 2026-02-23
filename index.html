@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -10,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Georgia', serif;
             overflow-x: hidden;
@@ -36,7 +37,8 @@
             pointer-events: all;
         }
 
-        .cover-left, .cover-right {
+        .cover-left,
+        .cover-right {
             position: absolute;
             top: 0;
             width: 100%;
@@ -138,7 +140,7 @@
             left: 50%;
             transform: translateX(-50%);
             border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .click-text {
@@ -190,8 +192,6 @@
             padding: 10px;
             flex-direction: column;
         }
-
-       
 
         /* Conteúdo principal */
         .main-content {
@@ -361,7 +361,7 @@
             background: white;
             padding: 25px 15px;
             border-radius: 12px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
             margin-bottom: 20px;
             text-align: center;
             border-top: 5px solid #001f3f;
@@ -570,123 +570,287 @@
             display: inline-block;
         }
 
-        /* Ajustes específicos para celulares pequenos */
-        @media (max-width: 380px) {
-            .monogram {
-                font-size: 42px;
+        /* ===== NOVOS ESTILOS PARA A CAPA MOBILE ===== */
+
+        /* Container para o AM e o laço ficarem lado a lado */
+        .logo-bow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 5px;
+            flex-wrap: wrap;
+            transform: translateY(30px)
+        }
+
+        .logo-bow-container .monogram {
+            font-size: 90px;
+            margin-bottom: 0;
+            line-height: 1;
+        }
+
+        .logo-bow-container .heart-divider {
+            margin: 0;
+            font-size: 35px;
+        }
+
+        .logo-bow-container .bow {
+            width: 120px;
+            height: 120px;
+            margin: 0;
+        }
+
+        /* Ajuste para o laço ficar proporcional */
+        .logo-bow-container .bow::before,
+        .logo-bow-container .bow::after {
+            width: 45px;
+            height: 45px;
+        }
+
+        .logo-bow-container .bow-center {
+            width: 25px;
+            height: 35px;
+            top: 32%;
+        }
+
+        /* Estilo para a foto não ficar cortada e não criar rolagem */
+        /* Estilo para a foto não ficar cortada e não criar rolagem */
+        .photoCapa {
+            width: 93%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 20px;
+            /* cria respiro lateral elegante */
+        }
+
+        .photoCapa img {
+            width: 100%;
+            /* leve zoom horizontal */
+            height: auto;
+            max-height: 85%;
+            /* não deixa esticar demais */
+            object-fit: cover;
+            object-position: center 30%;
+            /* ajusta foco no rosto */
+            border-radius: 20px;
+            /* deixa mais sofisticado */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Ajustes específicos para mobile */
+        @media (max-width: 767px) {
+            .cover-left .cover-content {
+                padding: 5px;
+                justify-content: space-between;
             }
-            
-            .couple-names {
-                font-size: 32px;
+
+            .interaction-side {
+                max-width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
             }
-            
-            .profile-decorations {
-                max-width: 250px;
+
+            .logo-bow-container {
+                margin-top: 5px;
+                gap: 15px;
+                transform: translateY(30px);
             }
-            
-            .top-decoration {
-                top: -30px;
-                width: 110%;
-                max-width: 300px;
+
+            .logo-bow-container .monogram {
+                font-size: 80px;
             }
-            
-            .left-decoration {
-                left: -40px;
-                height: 85%;
+
+            .logo-bow-container .heart-divider {
+                font-size: 28px;
             }
-            
-            .right-decoration {
-                right: -40px;
-                height: 85%;
+
+            .logo-bow-container .bow {
+                width: 95px;
+                height: 95px;
             }
-            
-            .countdown-item {
-                min-width: 60px;
+
+            .logo-bow-container .bow::before,
+            .logo-bow-container .bow::after {
+                width: 45px;
+                height: 45px;
             }
-            
-            .countdown-number {
-                font-size: 24px;
+
+            .logo-bow-container .bow-center {
+                width: 26px;
+                height: 35px;
             }
-            
-            .quote-text {
-                font-size: 22px;
+
+            .click-text {
+                padding: 8px 16px;
+                font-size: 12px;
+                margin: 3px auto;
             }
-            
-            .quote-author {
-                font-size: 14px;
+
+            .welcome-message {
+                font-size: 15px;
+                margin-bottom: 10px;
+                padding: 0 5px;
             }
-            
-            .empty-space {
-                font-size: 14px;
+
+            .photoCapa img {
+                max-width: 100%;
+                max-height: 85%;
+                transform: translateY(-20px);
             }
         }
 
-        /* Ajustes para telas maiores (tablets) */
+        /* Ajuste para telas muito pequenas */
+        @media (max-width: 380px) {
+            .logo-bow-container .monogram {
+                font-size: 70px;
+            }
+
+            .logo-bow-container .heart-divider {
+                font-size: 24px;
+            }
+
+            .logo-bow-container .bow {
+                width: 85px;
+                height: 85px;
+            }
+
+            .logo-bow-container .bow::before,
+            .logo-bow-container .bow::after {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-bow-container .bow-center {
+                width: 22px;
+                height: 30px;
+            }
+
+            .welcome-message {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .click-text {
+                padding: 6px 14px;
+                font-size: 11px;
+            }
+
+            .photoCapa img {
+                max-width: 100%;
+                max-height: 80%;
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Ajuste para telas muito pequenas */
+        @media (max-width: 380px) {
+            .logo-bow-container .monogram {
+                font-size: 60px;
+            }
+
+            .logo-bow-container .heart-divider {
+                font-size: 22px;
+            }
+
+            .logo-bow-container .bow {
+                width: 70px;
+                height: 70px;
+            }
+
+            .logo-bow-container .bow::before,
+            .logo-bow-container .bow::after {
+                width: 33px;
+                height: 33px;
+            }
+
+            .logo-bow-container .bow-center {
+                width: 18px;
+                height: 25px;
+            }
+
+            .welcome-message {
+                font-size: 15px;
+            }
+
+            .click-text {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+        }
+
+        /* Ajustes para telas maiores (tablets) - mantém o layout original */
         @media (min-width: 768px) {
-            .cover-left, .cover-right {
+
+            .cover-left,
+            .cover-right {
                 width: 50%;
                 height: 100%;
             }
-            
+
             .cover-left {
                 top: 0;
                 left: 0;
                 border-right: 1px solid #e0e0e0;
                 border-bottom: none;
             }
-            
+
             .cover-right {
                 top: 0;
                 right: 0;
                 border-left: 1px solid #e0e0e0;
                 border-top: none;
             }
-            
+
             .cover-container.opened .cover-left {
                 transform: translateX(-100%);
             }
-            
+
             .cover-container.opened .cover-right {
                 transform: translateX(100%);
             }
-            
+
             .main-content {
                 padding: 40px;
             }
-            
+
             .couple-names {
                 font-size: 50px;
             }
-            
+
             .profile-decorations {
                 max-width: 450px;
             }
-            
+
             .top-decoration {
                 top: -60px;
                 width: 130%;
                 max-width: 580px;
             }
-            
+
             .left-decoration {
                 left: -70px;
                 height: 95%;
             }
-            
+
             .right-decoration {
                 right: -70px;
                 height: 95%;
             }
-            
+
             .countdown {
                 gap: 20px;
                 max-width: 450px;
             }
-            
+
             .countdown-number {
                 font-size: 36px;
             }
-            
+
             .dresscode-section,
             .confirmation-section,
             .gifts-section,
@@ -694,16 +858,11 @@
                 padding: 35px 25px;
                 max-width: 600px;
             }
-            
-            .empty-space {
-                font-size: 18px;
-                padding: 30px;
-            }
-            
+
             .quote-text {
                 font-size: 32px;
             }
-            
+
             .quote-author {
                 font-size: 18px;
             }
@@ -716,7 +875,7 @@
                 padding-right: max(15px, env(safe-area-inset-right));
                 padding-bottom: max(20px, env(safe-area-inset-bottom));
             }
-            
+
             .invitation-header,
             .dresscode-section,
             .confirmation-section,
@@ -725,79 +884,77 @@
                 padding-left: max(10px, env(safe-area-inset-left));
                 padding-right: max(10px, env(safe-area-inset-right));
             }
-            
+
             .inspiration-quote {
-                padding-left: max(20px, env(safe-area-inset-left));
-                padding-right: max(20px, env(safe-area-inset-right));
-            }
-            
-            .empty-space {
                 padding-left: max(20px, env(safe-area-inset-left));
                 padding-right: max(20px, env(safe-area-inset-right));
             }
         }
     </style>
 </head>
+
 <body>
     <div class="cover-container active" id="cover">
         <div class="cover-left">
             <div class="cover-content">
                 <div class="interaction-side">
-                    <div class="monogram">AM</div>
-                    <div class="heart-divider">♡</div>
-                    <div class="bow">
-                        <div class="bow-center"></div>
+                    <div class="logo-bow-container">
+                        <div class="monogram">AM</div>
+                        <div class="heart-divider">♡</div>
+                        <div class="bow">
+                            <div class="bow-center"></div>
+                        </div>
                     </div>
                     <div class="heart-divider">♡</div>
-                    
+                    <div class="click-text" onclick="openCover()">Clique aqui para abrir</div>
+                    <div class="welcome-message">Descubra a celebração dos meus 15 anos</div>
                 </div>
             </div>
         </div>
         <div class="cover-right">
             <div class="cover-content">
-                <div class="photo-side">
-                   <div class="click-text" onclick="openCover()">Clique aqui para abrir</div>
-                    <div class="welcome-message">Descubra a celebração dos meus 15 anos</div>
+                <div class="photoCapa">
+                    <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/Imagem%20Final%20editada.jpeg" alt="">
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Fontes Google -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-    
+
     <div class="main-content">
         <div class="invitation-header">
             <!-- Container com decorações -->
             <div class="profile-decorations">
                 <!-- Imagem do topo - LOCAL -->
-                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-Topo.png" 
-                     alt="Decoração Topo" 
-                     class="top-decoration">
-                
+                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-Topo.png"
+                    alt="Decoração Topo" class="top-decoration">
+
                 <!-- Imagem da esquerda - LOCAL -->
-                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-ladoEsquerdo.png" 
-                     alt="Decoração Esquerda" 
-                     class="left-decoration">
-                
+                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-ladoEsquerdo.png"
+                    alt="Decoração Esquerda" class="left-decoration">
+
                 <!-- Imagem da direita - LOCAL -->
-                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-ladoDireito.png" 
-                     alt="Decoração Direita" 
-                     class="right-decoration">
-                
+                <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/traced-ladoDireito.png"
+                    alt="Decoração Direita" class="right-decoration">
+
                 <!-- Imagem principal (existente) - LOCAL -->
                 <div class="profile-image">
-                    <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/matos.png" 
-                         alt="Alice Matos"
-                         onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/001f3f/ffffff?text=Alice+Matos+15+anos'">
+                    <img src="https://raw.githubusercontent.com/arthur075/convite-15-anos/main/matos.png"
+                        alt="Alice Matos"
+                        onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/001f3f/ffffff?text=Alice+Matos+15+anos'">
                 </div>
             </div>
-            
+
             <div class="couple-names">Alice Matos</div>
             <div class="welcome-text">Está chegando o meu grande dia! Espero você lá!</div>
             <div class="event-date">07 de março de 2026</div>
@@ -830,7 +987,7 @@
             <div class="dresscode-text">
                 Para tornar nossa festa ainda mais especial, escolha roupas elegantes e sofisticadas!
             </div>
-            
+
             <!-- NOVA: Restrição de cores -->
             <div class="color-restriction">
                 <div class="restriction-title">⚠️ Atenção Especial</div>
@@ -841,7 +998,7 @@
                     <em>Agradeço pela compreensão e colaboração!</em>
                 </div>
             </div>
-            
+
             <div style="margin-top: 20px; color: #555; font-size: 15px;">
                 💡 Dica: Cores claras, tons pastéis e looks elegantes serão perfeitos!
             </div>
@@ -851,26 +1008,25 @@
         <div class="location-section">
             <div class="location-title">📍 Local do Evento</div>
             <div class="location-text">
-                A festa será realizada no <strong>Cristallo Eventos</strong>, um espaço encantador perfeito para celebrar essa data especial!
+                A festa será realizada no <strong>Cristallo Eventos</strong>, um espaço encantador perfeito para
+                celebrar essa data especial!
             </div>
-            
+
             <div class="location-info">
                 <div class="location-name">Cristallo Eventos</div>
                 <div class="location-address">
-                   Av. Amaralina, 1405 - Pampalona, Feira de Santana - BA, 44031-645
+                    Av. Amaralina, 1405 - Pampalona, Feira de Santana - BA, 44031-645
                 </div>
                 <div class="location-date">
                     📅 07 de Março de 2026 | ⏰ 19:00 horas
                 </div>
             </div>
-            
-            <a href="https://www.google.com/maps?q=Cristallo+Eventos" 
-               class="maps-button" 
-               target="_blank">
+
+            <a href="https://www.google.com/maps?q=Cristallo+Eventos" class="maps-button" target="_blank">
                 <span class="maps-icon">📍</span>
                 Ver Local no Google Maps
             </a>
-            
+
             <div style="margin-top: 10px; color: #5d8aa8; font-size: 13px;">
                 Clique no botão para abrir a localização no seu celular
             </div>
@@ -879,13 +1035,12 @@
         <div class="confirmation-section">
             <div class="confirmation-title">Confirme sua presença!</div>
             <div class="confirmation-text">
-                Para confirmar sua presença no meu aniversário de 15 anos, 
-                clique no botão abaixo para enviar uma mensagem no WhatsApp. 
+                Para confirmar sua presença no meu aniversário de 15 anos,
+                clique no botão abaixo para enviar uma mensagem no WhatsApp.
                 Será um prazer ter você comemorando comigo!
             </div>
-            <a href="https://wa.me/5575999930692?text=Olá!%20Confirmo%20minha%20presença%20no%20aniversário%20de%2015%20anos%20da%20Alice!" 
-               class="whatsapp-button" 
-               target="_blank">
+            <a href="https://wa.me/5575999930692?text=Olá!%20Confirmo%20minha%20presença%20no%20aniversário%20de%2015%20anos%20da%20Alice!"
+                class="whatsapp-button" target="_blank">
                 <span class="whatsapp-icon">📱</span>
                 Confirmar pelo WhatsApp
             </a>
@@ -906,7 +1061,7 @@
                     • Obsessed<br>
                     • Ruby<br>
                     • One Touch<br><br>
-                    
+
                     <strong>O Boticário:</strong><br>
                     • Floratta Red<br>
                     • Egeo Dolce<br>
@@ -920,12 +1075,12 @@
                     • Her Code Climax<br>
                     • Amor no Ar<br>
                     • Coffe Unique<br><br>
-                    
+
                     <strong>Natura:</strong><br>
                     • Ilia<br>
                     • Luna Ousadia<br>
                     • Luna Fascinante<br><br>
-                    
+
                     <strong>Carolina Herrera:</strong><br>
                     • Good Girl Blush<br>
                     • Very Good Girl
@@ -950,8 +1105,7 @@
                 <div class="category-title">3. Roupas e Calçados</div>
                 <div class="gift-items">
                     <ul>
-                        <li>Roupa de academia</li>
-                        <li>rasteirinhas<li>
+                        <li>rasteirinhas</li>
                         <li>chinelo</li>
                         <li>crocs</li>
                         <li>papete</li>
@@ -976,11 +1130,11 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="size-info">
                 💡 <strong>Tamanhos:</strong> Roupas: PP ou P | Calçados: 36/37
             </div>
-            
+
             <!-- Frase inspiradora -->
             <div class="inspiration-quote">
                 <div class="quote-text">… e o sonho continua</div>
@@ -993,12 +1147,12 @@
         function openCover() {
             const cover = document.getElementById('cover');
             cover.classList.add('opened');
-            
+
             // Adicionar vibração sutil no celular
             if (navigator.vibrate) {
                 navigator.vibrate(50);
             }
-            
+
             setTimeout(() => {
                 cover.style.display = 'none';
                 // Forçar redimensionamento para evitar problemas de layout
@@ -1032,41 +1186,41 @@
         }
 
         // Melhorar experiência mobile
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Adicionar suporte para toque na capa
             const clickText = document.querySelector('.click-text');
-            
+
             // Ajustar para telas pequenas
             function adjustLayout() {
                 const isMobile = window.innerWidth <= 767;
                 const cover = document.getElementById('cover');
-                
+
                 if (isMobile) {
                     // Garantir que a capa ocupe toda a tela
                     cover.style.height = '100vh';
                 }
             }
-            
+
             // Ajustar layout inicial
             adjustLayout();
-            
+
             // Ajustar ao redimensionar
             window.addEventListener('resize', adjustLayout);
-            
+
             // Touch events para o botão
-            clickText.addEventListener('touchstart', function(e) {
+            clickText.addEventListener('touchstart', function (e) {
                 e.preventDefault();
                 this.style.transform = 'scale(0.95)';
             });
-            
-            clickText.addEventListener('touchend', function(e) {
+
+            clickText.addEventListener('touchend', function (e) {
                 e.preventDefault();
                 this.style.transform = 'scale(1)';
                 openCover();
             });
-            
+
             // Clique normal (para desktop)
-            clickText.addEventListener('click', function(e) {
+            clickText.addEventListener('click', function (e) {
                 e.preventDefault();
                 openCover();
             });
@@ -1077,6 +1231,5 @@
         setInterval(updateCountdown, 1000);
     </script>
 </body>
+
 </html>
-
-
